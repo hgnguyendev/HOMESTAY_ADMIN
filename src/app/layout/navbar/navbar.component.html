@@ -1,0 +1,31 @@
+
+<div class="h-full rounded-lg flex flex-col px-2 py-4 transition-all duration-300"
+    [ngClass]="isCollapsed ? 'w-[70px] items-center' : 'w-[230px]'">
+    <div class="flex items-center justify-between  pb-4" [class.justify-center]="isCollapsed">
+        <div class="text-xl w-full font-semibold text-accent text-center" [class.hidden]="isCollapsed">Homestay Admin</div>
+        <button class="rounded-md hover:bg-gray-100 transition-colors cursor-pointer"
+            (click)="handleChangeSizeNavbar()">
+            <i class="bi text-accent" [ngClass]="{
+              'bi-layout-sidebar': !isCollapsed,
+              'bi-layout-sidebar-inset-reverse': isCollapsed
+            }"></i>
+        </button>
+    </div>
+
+    <div class="flex-1 py-4 space-y-1">
+        <ng-container *ngFor="let item of menuItems">
+            <div (click)="handleClickMenu(item.url)"
+                class="flex items-center rounded-lg gap-2 cursor-pointer transition-all duration-200 p-2" [ngClass]="{
+                'bg-indigo-50 text-indigo-600 light': isActiveRouter(item.url),
+                'justify-center': isCollapsed
+                }">
+                <div class="h-6 w-6 rounded-full bg-[#7c3aed] flex items-center justify-center flex-shrink-0">
+                    <i class="bi bi-{{ item.icon }} !text-white text-sm"></i>
+                </div>
+                <span class="text-[14px] font-medium" [class.hidden]="isCollapsed">
+                    {{ item.title }}
+                </span>
+            </div>
+        </ng-container>
+    </div>
+</div>
