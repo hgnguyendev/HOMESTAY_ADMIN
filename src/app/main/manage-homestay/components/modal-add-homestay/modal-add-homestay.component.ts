@@ -31,6 +31,7 @@ export class ModalAddHomestay {
   constructor(private fb: FormBuilder, private _uploadService: UploadService, private _homestayService: HomestayService, private _modalRef: NzModalRef, @Inject(NZ_MODAL_DATA) private data: any) {
     this.roomForm = this.fb.group({
       roomName: ['', Validators.required],
+      address: ['', Validators.required],
       roomType: ['', Validators.required],
       price: ['', [Validators.required, Validators.min(1)]],
       roomAcreage: ['', Validators.required],
@@ -44,6 +45,7 @@ export class ModalAddHomestay {
       const passData = this.data.data;
       this.roomForm.patchValue({
         roomName: passData.roomName,
+        address: passData.address,
         roomType: passData.roomType,
         price: passData.price,
         roomAcreage: passData.roomAcreage,
@@ -96,14 +98,11 @@ export class ModalAddHomestay {
     this.loading = true;
 
     if (this.roomForm.valid) {
-      // Chỉ lấy ảnh mới (có file)
       const newFiles = this.previewImages.filter(img => img.file).map(img => img.file);
       const oldUrls = this.previewImages.filter(img => !img.file).map(img => img.url);
 
       try {
         let imageUrls = [...oldUrls];
-
-        // Nếu có ảnh mới thì upload
         if (newFiles.length > 0) {
           const results = await firstValueFrom(this._uploadService.uploadImages(newFiles));
           const uploadedUrls = results.map(r => r.secure_url);
@@ -112,7 +111,10 @@ export class ModalAddHomestay {
 
         const formData = {
           ...this.roomForm.value,
-          amenities: this.selectedAmenities,
+          amenities: this.selectedAmenities.map(id => {
+            const amenity = this.amenities.find(a => a.id === id);
+            return { name: amenity?.id || id };
+          }),
           images: imageUrls
         };
 
