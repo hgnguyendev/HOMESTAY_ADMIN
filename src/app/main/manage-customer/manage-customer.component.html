@@ -1,1 +1,36 @@
-<p>manage-customer works!</p>
+<div class="p-4">
+    <div>
+        <h6 class="text-xl">Quản lý khách hàng trong homestay của bạn</h6>
+    </div>
+    <div class="flex items-center gap-4 justify-end my-4">
+        <input class="border border-gray-300 rounded-md py-2 px-4 placeholder-gray-400"  placeholder="Tìm kiếm theo tên khách hàng" />
+        <input class="border border-gray-300 rounded-md py-2 px-4 placeholder-gray-400" placeholder="Tìm kiếm theo Email khách hàng" />
+        <input class="border border-gray-300 rounded-md py-2 px-4 placeholder-gray-400" placeholder="Tìm kiếm theo Số điện thoại khách hàng" />
+        <input class="border border-gray-300 rounded-md py-2 px-4 placeholder-gray-400" placeholder="Tìm kiếm theo địa chỉ khách hàng" />
+        <button class="bg-purple-600 text-white! py-2 px-2 rounded-md cursor-pointer">Tìm kiếm</button>
+    </div>
+    <nz-table class="text-center" #basicTable [nzData]="users" [nzBordered]="true">
+        <thead class="">
+            <tr class="">
+                <th>STT</th>
+                <th>Tên</th>
+                <th>Địa chỉ</th>
+                <th>Email</th>
+                <th>Số điện thoại</th>
+                <th>Hành động</th>
+            </tr>
+        </thead>
+        <tbody class="">
+            <tr *ngFor="let item of basicTable.data; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{ item.name }}</td>
+                <td>{{ item.address }}</td>
+                <td>{{ item.email }}</td>
+                <td>{{ item.phone }}</td>
+                <td>
+                    <button class="cursor-pointer " (click)="handleDeleteUser(item)"><i class="bi bi-trash text-xl text-red-600"></i></button>
+                </td>
+            </tr>
+        </tbody>
+    </nz-table>
+</div>

@@ -1,4 +1,3 @@
-
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from "@angular/fire/compat/auth";
 import { ReplaySubject } from "rxjs";
@@ -38,6 +37,10 @@ export class UserService {
         }
     }
 
+    getAllUser() {
+        return this._baseService.get(`${AppConfig.settings.apiEndpoint}/users/get-all-user`);
+    }
+
     async getUserInfo() {
         try {
             const userInfo = await this._baseService.get(`${AppConfig.settings.apiEndpoint}/bo-users/get-user`);
@@ -46,6 +49,10 @@ export class UserService {
             console.log(err)
             this._currentUserSubject.next(null);
         }
+    }
+
+    async deleteUser(id: string) {
+        return this._baseService.delete(`${AppConfig.settings.apiEndpoint}/users/delete-user/${id}`);
     }
 
     async logout() {

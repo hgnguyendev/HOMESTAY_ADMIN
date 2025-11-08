@@ -4,6 +4,7 @@ import { CommonModule } from "@angular/common";
 import { ReactiveFormsModule } from "@angular/forms";
 import { RouterModule, Routes } from "@angular/router";
 import { ManageCustomer } from "./manage-customer.component";
+import { NzTableModule } from 'ng-zorro-antd/table';
 
 const routes: Routes = [
     {
@@ -17,7 +18,8 @@ const routes: Routes = [
     imports: [
         CommonModule,
         ReactiveFormsModule,
-        RouterModule.forChild(routes)
+        RouterModule.forChild(routes),
+        NzTableModule
     ],
     exports: []
 })

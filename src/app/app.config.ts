@@ -14,6 +14,7 @@ import { BaseSevice } from './service/base.service';
 import { UserService } from './service/user.service';
 import { AuthGuard } from './_guards/auth-guards';
 import { provideAnimations } from '@angular/platform-browser/animations';
+import { NZ_I18N,vi_VN  } from 'ng-zorro-antd/i18n';
 
 
 
@@ -35,6 +36,7 @@ export const appConfig: ApplicationConfig = {
     BaseSevice,
     UserService,
     AuthGuard,
+    { provide: NZ_I18N, useValue: vi_VN },
     {
       provide: APP_INITIALIZER,
       useFactory: initializeAppGlobal,
