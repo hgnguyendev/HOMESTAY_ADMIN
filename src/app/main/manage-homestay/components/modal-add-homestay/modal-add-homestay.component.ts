@@ -35,7 +35,8 @@ export class ModalAddHomestay {
       roomType: ['', Validators.required],
       price: ['', [Validators.required, Validators.min(1)]],
       roomAcreage: ['', Validators.required],
-      description: ['']
+      description: [''],
+      totalRoom: ['', Validators.required]
     });
     this.type = data.type;
   }
@@ -49,7 +50,8 @@ export class ModalAddHomestay {
         roomType: passData.roomType,
         price: passData.price,
         roomAcreage: passData.roomAcreage,
-        description: passData.description
+        description: passData.description,
+        totalRoom: passData.totalRoom
       })
       this.selectedAmenities = passData.amenities
       this.previewImages = (passData.images || []).map((url: string) => ({

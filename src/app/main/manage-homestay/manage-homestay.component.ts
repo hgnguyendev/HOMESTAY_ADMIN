@@ -24,8 +24,17 @@ export class ManageHomestay {
   homestay: any;
 
   async getAllHomestay() {
+    const params = {
+      // page: this.currentPage,
+      // limit: this.itemsPerPage,
+      // address: this.search.address || '',
+      // minPrice: this.search.minPrice || '',
+      // maxPrice: this.search.maxPrice || '',
+      // startDate: this.search.startDate || '',
+      // endDate: this.search.endDate || '',
+    };
     try {
-      const result = await this._homestayService.getAllHomestay();
+      const result = await this._homestayService.getAllHomestay(params);
       this.homestay = result;
 
     } catch (error: any) {
@@ -38,8 +47,8 @@ export class ManageHomestay {
       nzWidth: '800px',
       nzTitle: 'Thêm phòng',
       nzContent: ModalAddHomestay,
-      nzData :{
-        type:'create'
+      nzData: {
+        type: 'create'
       },
       nzCentered: true,
       nzFooter: null
