@@ -6,6 +6,7 @@ import { NzModalModule } from "ng-zorro-antd/modal";
 import { RouterModule, Routes } from "@angular/router";
 import { ModalAddHomestay } from "./components/modal-add-homestay/modal-add-homestay.component";
 import { SharedModule } from "../../_shared/shared.module";
+import { ManageHomestaySharedModule } from "./shared/manage-homestay-shared.module";
 
 const routes: Routes = [
     {
@@ -17,12 +18,13 @@ const routes: Routes = [
 @NgModule({
     declarations: [ManageHomestay, ModalAddHomestay],
     imports: [
-        CommonModule,
-        ReactiveFormsModule,
-        RouterModule.forChild(routes),
-        SharedModule,
-        NzModalModule
-    ],
+    CommonModule,
+    ReactiveFormsModule,
+    RouterModule.forChild(routes),
+    SharedModule,
+    NzModalModule,
+    ManageHomestaySharedModule
+],
     exports: []
 })
 

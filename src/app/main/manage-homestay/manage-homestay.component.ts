@@ -11,6 +11,22 @@ import { SwalService } from '../../service/swal.service';
   styleUrl: './manage-homestay.component.scss'
 })
 export class ManageHomestay {
+
+  currentPage: number = 1;
+  itemsPerPage: number = 10;
+  totalItems: number = 0;
+  totalPages: number = 0;
+  page: number = 1
+  detail: any;
+
+  search = {
+    address: '',
+    startDate: '',
+    endDate: '',
+    minPrice: '',
+    maxPrice: ''
+  };
+
   constructor(
     private _nzModal: NzModalService,
     private _homestayService: HomestayService,
@@ -21,26 +37,30 @@ export class ManageHomestay {
     this.getAllHomestay();
   }
 
-  homestay: any;
+  homestays: any;
 
   async getAllHomestay() {
-    const params = {
-      // page: this.currentPage,
-      // limit: this.itemsPerPage,
-      // address: this.search.address || '',
-      // minPrice: this.search.minPrice || '',
-      // maxPrice: this.search.maxPrice || '',
-      // startDate: this.search.startDate || '',
-      // endDate: this.search.endDate || '',
-    };
     try {
-      const result = await this._homestayService.getAllHomestay(params);
-      this.homestay = result;
+      const params = {
+        page: this.currentPage,
+        limit: this.itemsPerPage,
+        address: this.search.address || '',
+        minPrice: this.search.minPrice || '',
+        maxPrice: this.search.maxPrice || '',
+        startDate: this.search.startDate || '',
+        endDate: this.search.endDate || '',
+      };
 
+      const response: any = await this._homestayService.getAllHomestay(params);
+
+      this.homestays = response.data || [];
+      this.totalItems = response.total || 0;
+      this.totalPages = Math.ceil(this.totalItems / this.itemsPerPage);
     } catch (error: any) {
-
+      console.error(error);
     }
   }
+
 
   handleOpenModalAddHomestay() {
     const modalRef = this._nzModal.create({
@@ -95,5 +115,13 @@ export class ManageHomestay {
     } catch (error: any) {
       this._swalService.error('Xoá Homestay chưa thành công')
     }
+  }
+
+  handleDetailHomestay(item: any) {
+    this.detail = item;
+  }
+
+  handleCloseDetails(event: any) {
+    this.detail = event;
   }
 }

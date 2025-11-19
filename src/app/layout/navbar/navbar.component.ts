@@ -14,7 +14,6 @@ export class Navbar {
     { title: 'Trang chủ', url: '/home', submenu: [], icon: 'house', isActive: false },
     { title: 'Quản lí HomeStay', url: '/manage-homestay', submenu: [], icon: 'houses', isActive: false },
     { title: 'Quản lí đặt phòng', url: '/manage-booking-room', submenu: [], icon: 'hospital', isActive: false },
-    { title: 'Quản lí thanh toán', url: '/manage-payment', submenu: [], icon: 'credit-card', isActive: false },
     { title: 'Quản lí khách hàng', url: '/manage-customer', submenu: [], icon: 'people', isActive: false },
   ];
 
