@@ -10,10 +10,6 @@ const routes: Routes = [
         component: MainComponent,
         children: [
             {
-                path: 'home',
-                loadChildren: () => import('./home/home.module').then((m) => m.HomeModule)
-            },
-            {
                 path: 'manage-homestay',
                 loadChildren: () => import('./manage-homestay/manage-homestay.module').then((m) => m.ManageHomestayModule)
             },
