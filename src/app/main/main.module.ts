@@ -22,10 +22,6 @@ const routes: Routes = [
                 loadChildren: () => import('./manage-booking-room/manage-booking-room.module').then((m) => m.ManageBookingModule)
             },
             {
-                path: 'manage-payment',
-                loadChildren: () => import('./manage-payment/manage-payment.module').then((m) => m.ManagePaymentModule)
-            },
-            {
                 path: 'manage-customer',
                 loadChildren: () => import('./manage-customer/manage-customer.module').then((m) => m.ManageCustomerModule)
             },
