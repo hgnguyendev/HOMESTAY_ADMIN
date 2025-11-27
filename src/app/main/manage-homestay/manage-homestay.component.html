@@ -17,6 +17,45 @@
             </button>
         </div>
 
+        <!-- SEARCH BAR -->
+        <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-100 mb-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+
+                <!-- Tên phòng -->
+                <div>
+                    <label class="text-sm font-medium text-gray-600">Tên phòng</label>
+                    <input [(ngModel)]="search.roomName" (input)="handleClientSearch()" type="text"
+                        class="mt-1 w-full px-3 py-2 border rounded-lg focus:ring-purple-500 focus:border-purple-500"
+                        placeholder="Nhập tên phòng..." />
+                </div>
+
+                <!-- Giá min -->
+                <div>
+                    <label class="text-sm font-medium text-gray-600">Giá tối thiểu</label>
+                    <input [(ngModel)]="search.minPrice" (input)="handleClientSearch()" type="number"
+                        class="mt-1 w-full px-3 py-2 border rounded-lg focus:ring-purple-500 focus:border-purple-500"
+                        placeholder="Từ..." />
+                </div>
+
+                <!-- Giá max -->
+                <div>
+                    <label class="text-sm font-medium text-gray-600">Giá tối đa</label>
+                    <input [(ngModel)]="search.maxPrice" (input)="handleClientSearch()" type="number"
+                        class="mt-1 w-full px-3 py-2 border rounded-lg focus:ring-purple-500 focus:border-purple-500"
+                        placeholder="Đến..." />
+                </div>
+
+                <!-- Địa chỉ -->
+                <div>
+                    <label class="text-sm font-medium text-gray-600">Địa chỉ</label>
+                    <input [(ngModel)]="search.address" (input)="handleClientSearch()" type="text"
+                        class="mt-1 w-full px-3 py-2 border rounded-lg focus:ring-purple-500 focus:border-purple-500"
+                        placeholder="Nhập địa chỉ..." />
+                </div>
+            </div>
+        </div>
+
+
         <!-- Table Container -->
         <div class="bg-white rounded-xl shadow-sm overflow-hidden border border-gray-100">
             <div class="overflow-x-auto">
@@ -60,7 +99,8 @@
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-xl font-medium">
                                 <div class="flex items-center gap-2">
-                                    <button class="cursor-pointer" (click)="handleDetailHomestay(item)"><i class="bi bi-eye text-blue-500"></i></button>
+                                    <button class="cursor-pointer" (click)="handleDetailHomestay(item)"><i
+                                            class="bi bi-eye text-blue-500"></i></button>
                                     <button class="cursor-pointer" (click)="handleEditHomestay(item)"><i
                                             class="bi bi-pencil-square text-yellow-500"></i></button>
                                     <button class="cursor-pointer" (click)="handleDeleteHomestay(item._id)"><i

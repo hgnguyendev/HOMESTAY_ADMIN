@@ -18,14 +18,17 @@ export class ManageHomestay {
   totalPages: number = 0;
   page: number = 1
   detail: any;
+  originalHomestays: any[] = [];
 
   search = {
+    roomName: '',
     address: '',
-    startDate: '',
-    endDate: '',
     minPrice: '',
-    maxPrice: ''
+    maxPrice: '',
+    startDate: '',
+    endDate: ''
   };
+
 
   constructor(
     private _nzModal: NzModalService,
@@ -54,6 +57,7 @@ export class ManageHomestay {
       const response: any = await this._homestayService.getAllHomestay(params);
 
       this.homestays = response.data || [];
+      this.originalHomestays = [...this.homestays];
       this.totalItems = response.total || 0;
       this.totalPages = Math.ceil(this.totalItems / this.itemsPerPage);
     } catch (error: any) {
@@ -124,4 +128,21 @@ export class ManageHomestay {
   handleCloseDetails(event: any) {
     this.detail = event;
   }
+
+  handleClientSearch() {
+    const name = this.search.roomName.toLowerCase();
+    const min = Number(this.search.minPrice) || 0;
+    const max = Number(this.search.maxPrice) || Infinity;
+    const addr = this.search.address.toLowerCase();
+
+    this.homestays = this.originalHomestays.filter((item: any) => {
+      const matchName = item.roomName.toLowerCase().includes(name);
+      const matchAddress = item.address?.toLowerCase().includes(addr);
+      const matchPrice = item.price >= min && item.price <= max;
+
+      return matchName && matchAddress && matchPrice;
+    });
+  }
+
+
 }

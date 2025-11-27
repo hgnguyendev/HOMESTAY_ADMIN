@@ -10,6 +10,7 @@ import { HomestayBookedService } from '../../service/homestay-booked.service';
 export class ManageBookingRoom {
 
   listHomestayBooked: any;
+  searchText: string = '';
 
   constructor(
     private _homestayBooked: HomestayBookedService
@@ -26,6 +27,18 @@ export class ManageBookingRoom {
     } catch (error: any) {
 
     }
+  }
+
+  get filteredBookings() {
+    if (!this.searchText) return this.listHomestayBooked;
+
+    const text = this.searchText.toLowerCase();
+
+    return this.listHomestayBooked.filter((item: any) =>
+      item.roomName?.toLowerCase().includes(text) ||
+      item.user_name_placer?.toLowerCase().includes(text) ||
+      item.address?.toLowerCase().includes(text)
+    );
   }
 
 

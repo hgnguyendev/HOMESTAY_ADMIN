@@ -3,13 +3,25 @@
         <h6 class="text-xl">Quản lý khách hàng trong homestay của bạn</h6>
     </div>
     <div class="flex items-center gap-4 justify-end my-4">
-        <input class="border border-gray-300 rounded-md py-2 px-4 placeholder-gray-400"  placeholder="Tìm kiếm theo tên khách hàng" />
-        <input class="border border-gray-300 rounded-md py-2 px-4 placeholder-gray-400" placeholder="Tìm kiếm theo Email khách hàng" />
-        <input class="border border-gray-300 rounded-md py-2 px-4 placeholder-gray-400" placeholder="Tìm kiếm theo Số điện thoại khách hàng" />
-        <input class="border border-gray-300 rounded-md py-2 px-4 placeholder-gray-400" placeholder="Tìm kiếm theo địa chỉ khách hàng" />
-        <button class="bg-purple-600 text-white! py-2 px-2 rounded-md cursor-pointer">Tìm kiếm</button>
+
+        <input [(ngModel)]="search.name" class="border border-gray-300 rounded-md py-2 px-4"
+            placeholder="Tìm kiếm theo tên khách hàng" />
+
+        <input [(ngModel)]="search.email" class="border border-gray-300 rounded-md py-2 px-4"
+            placeholder="Tìm kiếm theo Email khách hàng" />
+
+        <input [(ngModel)]="search.phone" class="border border-gray-300 rounded-md py-2 px-4"
+            placeholder="Tìm kiếm theo số điện thoại khách hàng" />
+
+        <input [(ngModel)]="search.address" class="border border-gray-300 rounded-md py-2 px-4"
+            placeholder="Tìm kiếm theo địa chỉ khách hàng" />
+
+        <button (click)="handleSearch()" class="bg-purple-600 text-white py-2 px-4 rounded-md cursor-pointer">
+            Tìm kiếm
+        </button>
     </div>
-    <nz-table class="text-center" #basicTable [nzData]="users" [nzBordered]="true">
+
+    <nz-table class="text-center" #basicTable [nzData]="filteredUsers" [nzBordered]="true">
         <thead class="">
             <tr class="">
                 <th>STT</th>
@@ -28,7 +40,8 @@
                 <td>{{ item.email }}</td>
                 <td>{{ item.phone }}</td>
                 <td>
-                    <button class="cursor-pointer " (click)="handleDeleteUser(item)"><i class="bi bi-trash text-xl text-red-600"></i></button>
+                    <button class="cursor-pointer " (click)="handleDeleteUser(item)"><i
+                            class="bi bi-trash text-xl text-red-600"></i></button>
                 </td>
             </tr>
         </tbody>

@@ -10,6 +10,13 @@ import { SwalService } from '../../service/swal.service';
 })
 export class ManageCustomer {
   users: any;
+  filteredUsers: any[] = [];
+  search = {
+    name: '',
+    email: '',
+    phone: '',
+    address: ''
+  };
   constructor(
     private _userService: UserService,
     private _swalService: SwalService
@@ -23,6 +30,7 @@ export class ManageCustomer {
     try {
       const response = await this._userService.getAllUser();
       this.users = response;
+      this.filteredUsers = response;
     } catch (error: any) {
     }
   }
@@ -40,5 +48,20 @@ export class ManageCustomer {
       this._swalService.success('Xoá thành viên chưa thành công');
     }
   }
+
+  handleSearch() {
+    const name = this.search.name.toLowerCase();
+    const email = this.search.email.toLowerCase();
+    const phone = this.search.phone.toLowerCase();
+    const address = this.search.address.toLowerCase();
+
+    this.filteredUsers = this.users.filter((user: any) =>
+      (!name || user.name?.toLowerCase().includes(name)) &&
+      (!email || user.email?.toLowerCase().includes(email)) &&
+      (!phone || user.phone?.toLowerCase().includes(phone)) &&
+      (!address || user.address?.toLowerCase().includes(address))
+    );
+  }
+
 
 }

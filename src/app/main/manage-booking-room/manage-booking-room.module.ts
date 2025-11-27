@@ -1,6 +1,6 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { ReactiveFormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { RouterModule, Routes } from "@angular/router";
 import { ManageBookingRoom } from "./manage-booking-room.component";
 
@@ -15,6 +15,7 @@ const routes: Routes = [
     declarations: [ManageBookingRoom],
     imports: [
         CommonModule,
+        FormsModule,
         ReactiveFormsModule,
         RouterModule.forChild(routes)
     ],
